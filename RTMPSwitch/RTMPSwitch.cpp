@@ -1,38 +1,35 @@
 // RTMPSwitch.cpp : Defines the entry point for the console application.
 //
 
-extern "C"{
-#include "lib\librtmp\rtmp.h"
-}
-#include "lib\live\liveMedia\include\liveMedia.hh"
-#include "lib\live\BasicUsageEnvironment\include\BasicUsageEnvironment.hh"
-
-
+#include "RTMPSwitch.h"
 #include <iostream>
+#include <stdio.h>
+
+
+extern "C" {
+#include "include/librtmp/rtmp.h"
+#include <gstreamer-1.0/gst/gst.h>
+}
 
 using namespace std;
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
 
-	cout << "Starting RTMPSwitch" << endl;
-	cout << RTMP_LibVersion << endl;
+    // Set program version
+    const char version[] = "0.1.0";
+    
+    // Initialize GST
+    const gchar *nano_str;
+    guint gst_major, gst_minor, gst_micro, gst_nano;
 
-	BasicTaskScheduler* sch = BasicTaskScheduler::createNew();
-	BasicUsageEnvironment* env = BasicUsageEnvironment::createNew(*sch);
+    gst_init(&argc, &argv);
+    gst_version(&gst_major, &gst_minor, &gst_micro, &gst_nano);
 
-	const char url[] = "http://example.com";
+    // Rock and roll!
+    printf("Starting RTMPSwitch v%s (linked against Gstreamer %d.%d.%d)\n",
+            version, gst_major, gst_minor, gst_micro);
 
-	RTSPClient* rtspclient = RTSPClient::createNew(&env, url);
-
-	char eventLoopWatchVariable = 0;
-	sch->doEventLoop(&eventLoopWatchVariable);
-
-	/*RTMP * rtmp_handle = RTMP_Alloc();
-	RTMP_Init(rtmp_handle);
-	char url[] = "http://www.myurl.com";
-	RTMP_SetupURL(rtmp_handle, url);
-	RTMPPacket* rp;
-	RTMP_Connect(rtmp_handle, rp);*/
+    return 0;
 
 }
+
