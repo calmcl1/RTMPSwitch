@@ -10,5 +10,7 @@
 
 int main(int argc, char* argv[]);
 
+GstElement create_rtp_receiver(char ip[]);
+
 #endif	/* RTMPSWITCH_H */
 
