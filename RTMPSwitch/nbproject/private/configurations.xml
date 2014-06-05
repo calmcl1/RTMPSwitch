@@ -306,6 +306,7 @@
       <in>RTMPSwitch.cpp</in>
       <in>RTMPSwitch.h</in>
     </df>
+    <itemPath>.travis.yml</itemPath>
   </logicalFolder>
   <projectmakefile>makefile</projectmakefile>
   <confs>
