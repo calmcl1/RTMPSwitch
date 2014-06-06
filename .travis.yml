@@ -1,6 +1,6 @@
 language: cpp
 compiler: g++
-script: make
+script: make travis
 
 before_install:
     
