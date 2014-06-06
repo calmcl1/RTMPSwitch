@@ -3,9 +3,9 @@ compiler: g++
 script: make travis
 
 before_install:
-    
+    - sudo apt-add-repository ppa:gstreamer-developers/ppa
     - sudo apt-get update -q
-    - sudo apt-get install -y libgstreamer0.10-dev libgstreamer0.10-0
+    - sudo apt-get install -y libgstreamer1.0-dev libgstreamer1.0-0
    
 before_script:
     - cd RTMPSwitch
