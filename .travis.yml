@@ -1,6 +1,6 @@
 language: cpp
 compiler: g++
-script: make travis
+script: make all
 
 before_install:
     - sudo apt-add-repository ppa:gstreamer-developers/ppa
