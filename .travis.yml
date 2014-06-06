@@ -6,3 +6,6 @@ before_install:
     
     - sudo apt-get update -q
     - sudo apt-get install -y libgstreamer0.10-dev libgstreamer0.10-0
+   
+before_script:
+    - cd RTMPSwitch
