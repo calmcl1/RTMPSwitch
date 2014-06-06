@@ -3,6 +3,6 @@ compiler: g++
 script: make
 
 before_install:
-    - sudo add-apt-repository ppa:ubuntu/saucy
+    
     - sudo apt-get update -q
-    - sudo apt-get install -y libgstreamer1.0-dev libgstreamer1.0-0
+    - sudo apt-get install -y libgstreamer0.1-dev libgstreamer0.1-0
