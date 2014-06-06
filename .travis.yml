@@ -3,7 +3,7 @@ compiler: g++
 script: make all
 
 before_install:
-    - sudo apt-add-repository ppa:gstreamer-developers/ppa
+    - sudo apt-add-repository -y ppa:gstreamer-developers/ppa
     - sudo apt-get update -q
     - sudo apt-get install -y libgstreamer1.0-dev libgstreamer1.0-0
    
