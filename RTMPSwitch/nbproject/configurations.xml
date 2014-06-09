@@ -35,6 +35,7 @@
           <ccTool>
             <incDir>
               <pElem>lib</pElem>
+              <pElem>/usr/local/include</pElem>
               <pElem>/usr/include/gstreamer-1.0</pElem>
               <pElem>/usr/include/glib-2.0</pElem>
               <pElem>/usr/lib/x86_64-linux-gnu/glib-2.0/include</pElem>
@@ -42,8 +43,6 @@
           </ccTool>
         </makeTool>
       </makefileType>
-      <item path=".travis.yml" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="RTMPSwitch.cpp" ex="false" tool="1" flavor2="0">
       </item>
     </conf>
