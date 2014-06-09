@@ -11,4 +11,4 @@ before_install:
     - cd "glog-0.3.3" && ./configure && make && sudo make install
    
 before_script:
-    - cd RTMPSwitch
+    - cd ../RTMPSwitch
