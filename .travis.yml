@@ -6,9 +6,6 @@ before_install:
     - sudo apt-add-repository -y ppa:gstreamer-developers/ppa
     - sudo apt-get update -q
     - sudo apt-get install -y libgstreamer1.0-dev libgstreamer1.0-0
-    - wget "https://google-glog.googlecode.com/files/glog-0.3.3.tar.gz"
-    - tar -xvzf "glog-0.3.3.tar.gz"
-    - cd "glog-0.3.3" && ./configure && make && sudo make install
    
-before_script:
-    - cd ../RTMPSwitch
+#before_script:
+#    - cd RTMPSwitch
