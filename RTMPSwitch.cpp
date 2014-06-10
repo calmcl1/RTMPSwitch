@@ -72,9 +72,7 @@ void on_pad_added(GstElement *decoder, GstPad *pad, gpointer data) {
 }
 
 int main(int argc, char* argv[]) {
-
-    
-    
+   
     // Set program version
     const char version[] = "0.1.0";
 
@@ -85,7 +83,6 @@ int main(int argc, char* argv[]) {
     gst_init(&argc, &argv);
     gst_version(&gst_major, &gst_minor, &gst_micro, &gst_nano);
     loop = g_main_loop_new(NULL, FALSE);
-    create_new_srcbin("http://192.168.0.102:8080/test.ogg");
 
     //printf("Starting RTMPSwitch v%s (linked against Gstreamer %d.%d.%d)\n",
     //       version, gst_major, gst_minor, gst_micro);

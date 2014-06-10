@@ -8,6 +8,8 @@
 #ifndef SRCBIN_H
 #define	SRCBIN_H
 
+bool __srcbin_on_pad_added(GstElement *decoder, GstPad *pad, gpointer data);
+
 /**
  * This creates a bin, ready to use, with a uridecode and an identity
  * 
