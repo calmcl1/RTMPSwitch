@@ -12,6 +12,7 @@ extern "C" {
 }
 
 #include "RTMPSwitch.h"
+#include "srcBin.h"
 
 using namespace std;
 
@@ -72,6 +73,8 @@ void on_pad_added(GstElement *decoder, GstPad *pad, gpointer data) {
 
 int main(int argc, char* argv[]) {
 
+    
+    
     // Set program version
     const char version[] = "0.1.0";
 
@@ -82,6 +85,7 @@ int main(int argc, char* argv[]) {
     gst_init(&argc, &argv);
     gst_version(&gst_major, &gst_minor, &gst_micro, &gst_nano);
     loop = g_main_loop_new(NULL, FALSE);
+    create_new_srcbin("http://192.168.0.102:8080/test.ogg");
 
     //printf("Starting RTMPSwitch v%s (linked against Gstreamer %d.%d.%d)\n",
     //       version, gst_major, gst_minor, gst_micro);
@@ -91,19 +95,7 @@ int main(int argc, char* argv[]) {
     GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline));
     guint bus_watch_id = gst_bus_add_watch(bus, bus_callback, NULL);
     gst_object_unref(bus);
-
-    /*                       PIPELINE:
-     * 
-     *                   |------------------- audiobin ------------------------------|
-     * -------------     ----------------    -------------    ----------    ----------
-     * | uridecode | ->  | audioconvert | -> | vorbisenc | -> | oggmux | -> | fdsink |
-     * -------------     ----------------    -------------    ----------    ----------
-     *               \   ----------------    -------------  >
-     *                >  | videoconvert | -> | theoraenc | /
-     *                   ----------------    -------------
-     * 
-     */
-
+    
     // Create the first half of the pipeline
     decoder = gst_element_factory_make("uridecodebin", "uridec");
     g_object_set(G_OBJECT(decoder), "uri", "http://192.168.0.102:8080/test.ogg",
