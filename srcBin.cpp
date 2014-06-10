@@ -62,7 +62,7 @@ GstElement* create_new_srcbin(char* uri) {
     uridecode = gst_element_factory_make("uridecode", uridec_id);
     identity_a = gst_element_factory_make("identity", ident_a_id);
     identity_v = gst_element_factory_make("identity", ident_v_id);
-    g_object_set(G_OBJECT(decoder), "uri", uri, NULL);
+    g_object_set(G_OBJECT(uridecode), "uri", uri, NULL);
     g_signal_connect(uridecode, "pad-added", G_CALLBACK(__srcbin_on_pad_added), NULL);
 
     // Finally, return the bin

@@ -16,7 +16,7 @@ bool __srcbin_on_pad_added(GstElement *decoder, GstPad *pad, gpointer data);
  * @param uri The URI to be used as the source
  * @return GstElement (bin type)
  */
-GstElement create_new_srcbin(char* uri);
+GstElement* create_new_srcbin(char* uri);
 
 #endif	/* SRCBIN_H */
 
