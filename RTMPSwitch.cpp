@@ -130,23 +130,13 @@ int main(int argc, char* argv[]) {
     // Check out 'inputselector' and 'fdsink' elements
 
     // To keep track of all our RTP receivers
-    //vector<GstElement> rtp_receivers;
-    //GstElement rtp1 = create_rtp_receiver("12345");
-    //rtp_receivers.assign(1,*rtp1);
+    //vector<GstElement> sources;
+    //GstElement src1 = create_new_srcbin("12345");
+    //sources.assign(1,src1);
 
     // On we go!
     gst_element_set_state(pipeline, GST_STATE_PLAYING);
     g_main_loop_run(loop);
     return 0;
 
-}
-
-GstElement create_rtp_receiver(char ip[]) {
-    GstElement * element = gst_element_factory_make("fakesrc", "src");
-    if (!element) {
-        printf("Could not make element\n");
-    } else {
-        printf("got element\n");
-        return *element;
-    }
 }

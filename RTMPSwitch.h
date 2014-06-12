@@ -14,7 +14,5 @@ void on_pad_added(GstElement *decoder, GstPad *pad, gpointer data);
 
 int main(int argc, char* argv[]);
 
-GstElement create_rtp_receiver(char ip[]);
-
 #endif	/* RTMPSWITCH_H */
 
