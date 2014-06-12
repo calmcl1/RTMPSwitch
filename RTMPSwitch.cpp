@@ -93,6 +93,7 @@ int main(int argc, char* argv[]) {
     guint bus_watch_id = gst_bus_add_watch(bus, bus_callback, NULL);
     gst_object_unref(bus);
     
+    /*
     // Create the first half of the pipeline
     decoder = gst_element_factory_make("uridecodebin", "uridec");
     g_object_set(G_OBJECT(decoder), "uri", "http://192.168.0.102:8080/test.ogg",
@@ -100,9 +101,13 @@ int main(int argc, char* argv[]) {
 
     // uridecode adds a pad for each stream found
     g_signal_connect(decoder, "pad-added", G_CALLBACK(on_pad_added), NULL);
-
+*/
+    
+    decoder = create_new_srcbin("http://127.0.0.1:8080/test.ogg");
+    
     // Now create the audio-playing part of the pipeline
     audiobin = gst_bin_new("audiobin");
+    
     conv = gst_element_factory_make("audioconvert", "aconv");
     vorbisenc = gst_element_factory_make("vorbisenc", "enc");
     oggmux = gst_element_factory_make("oggmux", "mux");
@@ -119,6 +124,8 @@ int main(int argc, char* argv[]) {
     gst_element_add_pad(audiobin, gst_ghost_pad_new("sink", audiopad));
 
     gst_bin_add_many(GST_BIN(pipeline), decoder, audiobin, NULL);
+    gst_element_link_pads(decoder,"src_a",audiobin,"sink");
+    //gst_element_link_pads(decoder,"src_v",videobin,"sink");
 
     // Check out 'inputselector' and 'fdsink' elements
 

@@ -6,9 +6,13 @@
  */
 
 #include <stdio.h>
+#include <iostream>
 #include <gstreamer-1.0/gst/gst.h>
 #include "srcBin.h"
 #include <time.h>
+#include <iostream>
+#include <algorithm>
+#include <typeinfo>
 
 GstElement *srcbin;
 GstElement *uridecode, *identity_a, *identity_v;
@@ -59,12 +63,22 @@ GstElement* create_new_srcbin(char* uri) {
     sprintf(ident_v_id, "ident_v%d", t);
 
     srcbin = gst_bin_new(bin_id);
-    uridecode = gst_element_factory_make("uridecode", uridec_id);
+    uridecode = gst_element_factory_make("uridecodebin", uridec_id);
     identity_a = gst_element_factory_make("identity", ident_a_id);
     identity_v = gst_element_factory_make("identity", ident_v_id);
     g_object_set(G_OBJECT(uridecode), "uri", uri, NULL);
     g_signal_connect(uridecode, "pad-added", G_CALLBACK(__srcbin_on_pad_added), NULL);
 
-    // Finally, return the bin
+    gst_bin_add_many(GST_BIN(srcbin), uridecode, identity_a, identity_v, NULL);
+    gst_element_link(uridecode, identity_v);
+    gst_element_link(uridecode, identity_a);
+
+    GstPad * audiopad = gst_element_get_static_pad(identity_a, "src");
+    GstPad * videopad = gst_element_get_static_pad(identity_v, "src");
+
+    gst_element_add_pad(srcbin, gst_ghost_pad_new("src_a", audiopad));
+    gst_element_add_pad(srcbin, gst_ghost_pad_new("src_v", videopad));
+
+            // Finally, return the bin
     return srcbin;
 }
