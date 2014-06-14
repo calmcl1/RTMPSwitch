@@ -7,4 +7,4 @@ Output stream is currently vorbis encoded, ogg muxed.
 
 Note
 ----
-Do you use this software? If so, do drop me a line at [info@callum-mclean.co.uk](mailto:info@callum-mclean.co.uk), or, even better - [leave me a tip](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3YQQB6JSHULVY) :)
+Do you use this software? If so, do drop me a line at [mail@callum-mclean.co.uk](mailto:mail@callum-mclean.co.uk), or, even better - [leave me a tip](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=3YQQB6JSHULVY) :)
