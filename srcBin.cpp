@@ -10,9 +10,6 @@
 #include <gstreamer-1.0/gst/gst.h>
 #include "srcBin.h"
 #include <time.h>
-#include <iostream>
-#include <algorithm>
-#include <typeinfo>
 
 GstElement *srcbin;
 GstElement *uridecode, *identity_a, *identity_v;
