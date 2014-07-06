@@ -7,7 +7,6 @@
 #include <vector>
 
 extern "C" {
-#include "include/librtmp/rtmp.h"
 #include <gstreamer-1.0/gst/gst.h>
 }
 
@@ -75,7 +74,7 @@ void on_pad_added(GstElement *decoder, GstPad *pad, gpointer data) {
 
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
 
     // Set program version
     const char version[] = "0.1.0";
@@ -97,9 +96,17 @@ int main(int argc, char* argv[]) {
     GstBus *bus = gst_pipeline_get_bus(GST_PIPELINE(pipeline));
     guint bus_watch_id = gst_bus_add_watch(bus, bus_callback, NULL);
     gst_object_unref(bus);
+    
+    char *src;
+    
+    if (argc > 1){
+        sprintf(src,"file://%s",argv[1]);
+    } else {
+        src = "file:///home/callum/Desktop/dewtwg-short.mp4";
+    }
 
     // Create the first half of the pipeline
-    char src[] = "file:///home/dev/Desktop/dewtwg-short.mp4";
+    cerr << "Source file:" << src << endl;
     decoder = create_new_srcbin(src);
 
     // Now create the audio-playing part of the pipeline
@@ -108,7 +115,8 @@ int main(int argc, char* argv[]) {
     aconv = gst_element_factory_make("audioconvert", "aconv");
     ares = gst_element_factory_make("audioresample", "ares");
 
-    vorbisenc = gst_element_factory_make("avenc_aac", "aenc");
+    vorbisenc = gst_element_factory_make("voaacenc", "aenc");
+    //g_object_set(G_OBJECT(vorbisenc), "target", 1, NULL);
     g_object_set(G_OBJECT(vorbisenc), "bitrate", 96000, NULL);
 
     audio_caps = gst_caps_new_simple("audio/x-raw",
@@ -183,6 +191,10 @@ int main(int argc, char* argv[]) {
     cerr << "linked decoder audio to audiobin? " << gst_element_link_pads(decoder, "src_a", audiobin, "sink") << endl;
     cerr << "linked decoder video to videobin? " << gst_element_link_pads(decoder, "src_v", videobin, "sink") << endl;
 
+    /*GstCaps* ogg_caps = gst_caps_new_simple("audio/mpeg",
+            "rate", G_TYPE_INT, 44100,
+            NULL);*/
+    
     cerr << "linked audiobin to oggmux? " << gst_element_link(audiobin, oggmux) << endl;
     cerr << "linked videobin to oggmux? " << gst_element_link(videobin, oggmux) << endl;
     cerr << "linked oggmux to sink? " << gst_element_link(oggmux, sink) << endl;
